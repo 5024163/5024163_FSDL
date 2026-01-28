@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    padding: 40px;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+b {
+    color: #e74c3c;
+}
+
+i {
+    color: #2980b9;
+}
+
+sub {
+    color: #27ae60;
+    font-size: 14px;
+}
+
+sup {
+    color: #8e44ad;
+    font-size: 14px;
+}
