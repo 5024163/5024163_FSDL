@@ -1,25 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JS Concepts Demo</title>
+  <title>JS Concepts App</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: #3498db;
+      color: white;
+      padding: 10px;
+    }
+
+    td {
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+
+    .date {
+      color: gray;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
-<body style="font-family: Arial; text-align:center; margin-top:40px;">
 
-  <h2>Student Form (JS Concepts)</h2>
+<body>
 
-  <input type="text" id="name" placeholder="Enter Name"><br><br>
-  <input type="number" id="age" placeholder="Enter Age"><br><br>
-  <button onclick="addStudent()">Add Student</button>
+  <div class="container">
+    <h2>📘 Student Manager</h2>
 
-  <h3 id="date"></h3>
+    <div class="date" id="date"></div>
 
-  <h3>Student List</h3>
-  <ul id="list"></ul>
+    <input type="text" id="name" placeholder="Enter Name">
+    <input type="number" id="age" placeholder="Enter Age">
+
+    <button onclick="addStudent()">Add Student</button>
+
+    <div class="error" id="error"></div>
+
+    <table id="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+        </tr>
+      </thead>
+      <tbody id="list"></tbody>
+    </table>
+  </div>
 
   <script>
     let students = []; // ARRAY
 
-    // Show current date (DATE)
+    // DATE
     const today = new Date();
     document.getElementById("date").innerText =
       "Today: " + today.toDateString();
@@ -29,26 +109,32 @@
         let name = document.getElementById("name").value;
         let age = document.getElementById("age").value;
 
+        document.getElementById("error").innerText = "";
+
         // VALIDATION
         if (name === "" || age === "") {
           throw "All fields are required!";
         }
 
-        if (age < 1) {
-          throw "Invalid age!";
+        if (age <= 0) {
+          throw "Enter valid age!";
         }
 
-        // STRING operation
+        // STRING operations
         name = name.trim();
         name = name.charAt(0).toUpperCase() + name.slice(1);
 
         // Add to ARRAY
-        students.push({ name: name, age: age });
+        students.push({ name, age });
 
         displayStudents();
 
+        // clear inputs
+        document.getElementById("name").value = "";
+        document.getElementById("age").value = "";
+
       } catch (error) {
-        alert("Error: " + error); // ERROR HANDLING
+        document.getElementById("error").innerText = error; // ERROR HANDLING
       }
     }
 
@@ -56,11 +142,14 @@
       let list = document.getElementById("list");
       list.innerHTML = "";
 
-      students.forEach((student, index) => {
-        let li = document.createElement("li");
-        li.innerText =
-          student.name + " | Age: " + student.age;
-        list.appendChild(li);
+      students.forEach((student) => {
+        let row = `
+          <tr>
+            <td>${student.name}</td>
+            <td>${student.age}</td>
+          </tr>
+        `;
+        list.innerHTML += row;
       });
     }
   </script>
