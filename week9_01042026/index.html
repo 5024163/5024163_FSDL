@@ -5,17 +5,77 @@
 
     <!-- AngularJS CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #eaf3fb; /* light blue */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            width: 360px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        p {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 15px;
+        }
+
+        input:focus {
+            border-color: #3498db;
+        }
+
+        .output {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #2c3e50;
+        }
+
+        .name {
+            color: #3498db;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
-<body ng-controller="myController" style="font-family: Arial; text-align: center; margin-top: 50px;">
+<body ng-controller="myController">
 
-    <h1>Hello World using AngularJS</h1>
+    <div class="container">
+        <h1>Hello World</h1>
+        <p>Enter your name</p>
 
-    <!-- Input using ng-model -->
-    <input type="text" ng-model="name" placeholder="Enter your name" />
+        <!-- ng-model -->
+        <input type="text" ng-model="name" placeholder="Your Name" />
 
-    <!-- Expression -->
-    <h2>Hello {{name}} 👋</h2>
+        <!-- expression -->
+        <div class="output">
+            Hello <span class="name">{{name}}</span> 👋
+        </div>
+    </div>
 
     <script>
         var app = angular.module("myApp", []);
