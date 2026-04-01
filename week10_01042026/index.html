@@ -11,56 +11,71 @@
             font-family: Arial;
             background-color: #eef5fb;
             margin: 0;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            padding-top: 40px;
+            align-items: center;
         }
 
         .container {
             background: #fff;
-            padding: 25px;
-            width: 400px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            width: 420px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         h2 {
             text-align: center;
+            margin-bottom: 20px;
         }
 
         input {
             width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
+            padding: 12px;
+            margin-top: 12px;
+            border-radius: 6px;
             border: 1px solid #ccc;
+            font-size: 14px;
         }
 
-        .error {
-            color: red;
-            font-size: 12px;
+        input:focus {
+            border-color: #3498db;
         }
 
         button {
             width: 100%;
             margin-top: 15px;
-            padding: 10px;
+            padding: 12px;
             background: #3498db;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
+            font-size: 15px;
         }
 
         button:disabled {
             background: #aaa;
         }
 
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
         .card {
             margin-top: 20px;
-            padding: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f9fbfd;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            text-align: left;
+        }
+
+        .card strong {
+            font-size: 16px;
         }
     </style>
 </head>
@@ -79,7 +94,7 @@
         </div>
 
         <!-- Age -->
-        <input type="number" name="age" ng-model="student.age" placeholder="Age" required min="18" max="60"/>
+        <input type="number" name="age" ng-model="student.age" placeholder="Age" required min="18" max="60" />
         <div class="error" ng-show="studentForm.age.$touched && studentForm.age.$invalid">
             Age must be between 18 and 60
         </div>
@@ -97,8 +112,8 @@
 
     </form>
 
-    <!-- Display Students -->
-    <div class="card" ng-repeat="s in students">
+    <!-- Student List -->
+    <div class="card" ng-repeat="s in students track by $index">
         <strong>{{s.name}}</strong><br>
         Age: {{s.age}}<br>
         Course: {{s.course}}
@@ -110,23 +125,26 @@
     var app = angular.module("studentApp", []);
 
     app.controller("myController", function($scope) {
+
         $scope.students = [];
 
         // Event function
         $scope.addStudent = function() {
             if ($scope.studentForm.$valid) {
+
                 $scope.students.push({
                     name: $scope.student.name,
                     age: $scope.student.age,
                     course: $scope.student.course
                 });
 
-                // clear form
+                // Reset form
                 $scope.student = {};
                 $scope.studentForm.$setPristine();
                 $scope.studentForm.$setUntouched();
             }
         };
+
     });
 </script>
 
