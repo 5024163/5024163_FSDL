@@ -11,7 +11,7 @@ app.use(express.json());
 app.use("/students", studentRoutes);
 
 // MongoDB connection
-mongoose.connect("mongodb://127.0.0.1:27017/fsdl_exp9")
+mongoose.connect("mongodb+srv://vishakhafcrit_db_user:test123@cluster0.wja3clh.mongodb.net/fsdl_exp9?retryWrites=true&w=majority")
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));
 
